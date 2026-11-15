@@ -1,0 +1,8 @@
+*.out
+*.log
+*.png
+*.jpeg
+*.csv
+*.eigenvec
+*.eigenval
+*.nosex
