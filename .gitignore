@@ -6,3 +6,5 @@
 *.eigenvec
 *.eigenval
 *.nosex
+*.vcf.gz
+*.vscode
