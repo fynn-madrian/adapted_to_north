@@ -63,3 +63,7 @@ s <- ggplot(scree, aes(x = PC, y = variance)) +
   theme_bw()
 
 ggsave(file.path(dir, "pca_scree.png"), s, width = 6, height = 4)
+
+# Samples furthest out on PC1 and on PC2
+head(pca[order(-abs(pca$PC1)), c("IID", "PC1", "PC2")], 5)
+head(pca[order(-abs(pca$PC2)), c("IID", "PC1", "PC2")], 5)
