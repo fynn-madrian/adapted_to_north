@@ -1,0 +1,5 @@
+adn013_90perc_libr_20200819.merge.hs37d5.fa adn013_90perc_libr_20200819.merge.hs37d5.fa
+adn010_90perc_libr_20210308.merge.hs37d5.fa adn010_90perc_libr_20210308.merge.hs37d5.fa
+ajv59_90perc_libr_170208.merge.hs37d5.fa ajv59_90perc_libr_170208.merge.hs37d5.fa
+ajv55O_90perc_libr_20210204.merge.hs37d5.fa ajv55O_90perc_libr_20210204.merge.hs37d5.fa
+ajv52a_90perc_libr_20210204.merge.hs37d5.fa ajv52a_90perc_libr_20210204.merge.hs37d5.fa

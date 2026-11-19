@@ -8,3 +8,8 @@
 *.nosex
 *.vcf.gz
 *.vscode
+*.bim
+*.bam
+*.fam
+*.bed
+*.fai
