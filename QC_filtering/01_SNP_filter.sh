@@ -1,0 +1,41 @@
+#!/bin/bash
+#SBATCH -A uppmax2026-1-301
+#SBATCH -J SNP_filtering
+#SBATCH -t 12:00:00
+#SBATCH -n 4
+
+### NOT DONE ###
+
+module load BCFtools/1.23.1-GCC-15.2.0
+
+REF=/proj/northadapt/data/reference/raw
+TARGET=/proj/northadapt/data/target/raw/merge_ibd.vcf.gz
+REF_OUT=/proj/northadapt/data/reference/filtered
+TARGET_OUT=/proj/northadapt/data/target/filtered
+# Target data: use samples in noflag.inds.txt 
+
+# SNP FILTERING
+# biallelic SNPs, INFO, MASK for ref
+
+#TARGET
+mkdir -p $TARGET_OUT/01_SNP_filter
+bcftools view --threads 4 \
+    -m2 -M2 -v snps \
+    -i 'INFO >= 0.8' \
+    -Oz -o $TARGET_OUT/02_SNP_filter/target.SNPfilter.vcf.gz \
+    $TARGET
+bcftools index -t $TARGET_OUT/01_SNP_filter/target.SNPfilter.vcf.gz
+
+#REF
+mkdir -p $REF_OUT/01_SNP_filter
+for f in $REF/*.vcf.gz; do
+    CHROM=$(basename $f .neo_impute_ph.vcf.gz)
+    echo "Processing $CHROM"
+    bcftools view --threads 4 \
+        -S $REF/noflag.inds.txt \
+        -m2 -M2 -v snps \ #biallelic SNPs
+        -i 'MASK_1000G=1 & INFO >= 0.8' \
+        -Oz -o $REF_OUT/01_SNP_filter/$CHROM.SNPfilter.vcf.gz \
+        $f
+    bcftools index -t $REF_OUT/01_SNP_filter/$CHROM.SNPfilter.vcf.gz
+done
