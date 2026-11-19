@@ -24,7 +24,7 @@ mkdir -p $TARGET_OUT/03_MAF_filter
 # RELATEDNESS FILTERING
 # Filter out related individuals from the target dataset (third degree))
 
-# Filter out related individuals from the ref dataset (third degree)
+# Filter out related individuals from the ref dataset (third degree) (optional)
 
 
 
