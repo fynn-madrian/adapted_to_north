@@ -23,11 +23,16 @@ mkdir -p $TARGET_OUT/03_MAF_filter
 
 # RELATEDNESS FILTERING
 # Filter out related individuals from the target dataset (third degree))
+# double check:
+# apd006 and apd016 have a first-degree relationship
+# Kor002 and kor007, adn003 and adn004 are a second-degree relationship
+
+
 
 # Filter out related individuals from the ref dataset (third degree) (optional)
 
 
 
-# Seperarte the merged dataset into ref and target datasets amd save
+# Seperarte the merged dataset into ref and target datasets and save
 
 # Transversion filter for sanity check, save datasets
