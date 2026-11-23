@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -A uppmax2026-1-301
-#SBATCH -J SNP_filtering
-#SBATCH -t 12:00:00
+#SBATCH -J MAF_filtering
+#SBATCH -t 4:00:00
 #SBATCH -n 4
 #SBATCH --mail-type=ALL
 #SBATCH --output=./%x.%j.out
@@ -20,21 +20,4 @@ mkdir -p $TARGET_OUT/02_MAF_filter
 
 # Shared sites between ref and target
 
-# Merge ref and target datasets and MAF filter
-
-
-# RELATEDNESS FILTERING
-# Filter out related individuals from the target dataset (third degree))
-# double check:
-# apd006 and apd016 have a first-degree relationship
-# Kor002 and kor007, adn003 and adn004 are a second-degree relationship
-
-
-
-# Filter out related individuals from the ref dataset (third degree) (optional)
-
-
-
-# Seperarte the merged dataset into ref and target datasets and save
-
-# Transversion filter for sanity check, save datasets
+# Merge ref and target datasets and apply MAF filter
