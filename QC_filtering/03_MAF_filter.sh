@@ -20,7 +20,7 @@ REF_OUT=/gorilla/proj/northadapt/data/reference/filtered/03_MAF_filter
 TARGET_OUT=/gorilla/proj/northadapt/data/target/filtered/03_MAF_filter
 
 REF_FILE=$REF_IN/${CHR}.SNPfilter.vcf.gz        
-TARGET_FILE=$TARGET_IN/target.SNPfilter.vcf.gz # change to the right file
+TARGET_FILE=$TARGET_IN/target_filtered.vcf.gz
 
 TMP=$TARGET_OUT/03_MAF_filter/tmp_chr${CHR}
 mkdir -p $TMP
