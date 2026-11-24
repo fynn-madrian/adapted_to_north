@@ -7,8 +7,6 @@
 #SBATCH --mail-type=ALL
 #SBATCH --output=./%x.%j.out
 
-### NOT DONE ###
-
 set -euo pipefail
 module load BCFtools/1.23.1-GCC-15.2.0
 
@@ -16,15 +14,15 @@ CHR=$SLURM_ARRAY_TASK_ID
 MAF_MIN=0.01
 THREADS=4
 
-REF_IN=/proj/northadapt/data/reference/filtered/01_SNP_filter
-TARGET_IN=/proj/northadapt/data/target/filtered/01_SNP_filter
-REF_OUT=/proj/northadapt/data/reference/filtered/02_MAF_filter
-TARGET_OUT=/proj/northadapt/data/target/filtered/02_MAF_filter
+REF_IN=/gorilla/proj/northadapt/data/reference/filtered/02
+TARGET_IN=/gorilla/proj/northadapt/data/target/filtered/01_SNP_filter
+REF_OUT=/gorilla/proj/northadapt/data/reference/filtered/03_MAF_filter
+TARGET_OUT=/gorilla/proj/northadapt/data/target/filtered/03_MAF_filter
 
 REF_FILE=$REF_IN/${CHR}.SNPfilter.vcf.gz          # adjust to your actual file names
 TARGET_FILE=$TARGET_IN/target.SNPfilter.vcf.gz
 
-TMP=$TARGET_OUT/02_MAF_filter/tmp_chr${CHR}
+TMP=$TARGET_OUT/03_MAF_filter/tmp_chr${CHR}
 mkdir -p $TMP
 
 count() { bcftools index -n "$1"; }
@@ -51,19 +49,19 @@ bcftools merge -m none --threads $THREADS -Ou $TMP/isec/0000.vcf.gz $TMP/isec/00
 bcftools index -t $TMP/merged.maf.vcf.gz
 
 # 4. Split back into reference and target
-bcftools view -S $TMP/ref_samples.txt    --threads $THREADS -Oz -o $REF_OUT/02_MAF_filter/${CHR}.MAF.vcf.gz    $TMP/merged.maf.vcf.gz
-bcftools view -S $TMP/target_samples.txt --threads $THREADS -Oz -o $TARGET_OUT/02_MAF_filter/${CHR}.MAF.vcf.gz $TMP/merged.maf.vcf.gz
-bcftools index -t $REF_OUT/02_MAF_filter/${CHR}.MAF.vcf.gz
-bcftools index -t $TARGET_OUT/02_MAF_filter/${CHR}.MAF.vcf.gz
+bcftools view -S $TMP/ref_samples.txt    --threads $THREADS -Oz -o $REF_OUT/03_MAF_filter/${CHR}.MAF.vcf.gz    $TMP/merged.maf.vcf.gz
+bcftools view -S $TMP/target_samples.txt --threads $THREADS -Oz -o $TARGET_OUT/03_MAF_filter/${CHR}.MAF.vcf.gz $TMP/merged.maf.vcf.gz
+bcftools index -t $REF_OUT/03_MAF_filter/${CHR}.MAF.vcf.gz
+bcftools index -t $TARGET_OUT/03_MAF_filter/${CHR}.MAF.vcf.gz
 
 # 5. SNP counts and consistency check
 N_REF=$(count $TMP/ref.vcf.gz);            N_TGT=$(count $TMP/target.vcf.gz)
 N_SHARED=$(count $TMP/isec/0000.vcf.gz);   N_MAF=$(count $TMP/merged.maf.vcf.gz)
-N_REF_OUT=$(count $REF_OUT/02_MAF_filter/${CHR}.MAF.vcf.gz)
-N_TGT_OUT=$(count $TARGET_OUT/02_MAF_filter/${CHR}.MAF.vcf.gz)
+N_REF_OUT=$(count $REF_OUT/03_MAF_filter/${CHR}.MAF.vcf.gz)
+N_TGT_OUT=$(count $TARGET_OUT/03_MAF_filter/${CHR}.MAF.vcf.gz)
 
-echo -e "chr\tref\ttarget\tshared\tafter_MAF\tref_out\ttarget_out" > $TARGET_OUT/02_MAF_filter/counts_chr${CHR}.tsv
-echo -e "${CHR}\t${N_REF}\t${N_TGT}\t${N_SHARED}\t${N_MAF}\t${N_REF_OUT}\t${N_TGT_OUT}" >> $TARGET_OUT/02_MAF_filter/counts_chr${CHR}.tsv
+echo -e "chr\tref\ttarget\tshared\tafter_MAF\tref_out\ttarget_out" > $TARGET_OUT/03_MAF_filter/counts_chr${CHR}.tsv
+echo -e "${CHR}\t${N_REF}\t${N_TGT}\t${N_SHARED}\t${N_MAF}\t${N_REF_OUT}\t${N_TGT_OUT}" >> $TARGET_OUT/03_MAF_filter/counts_chr${CHR}.tsv
 
 if [ "$N_REF_OUT" != "$N_TGT_OUT" ]; then
     echo "ERROR: reference and target outputs differ in SNP count" >&2
