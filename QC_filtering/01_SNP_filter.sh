@@ -6,10 +6,10 @@
 
 module load BCFtools/1.23.1-GCC-15.2.0
 
-REF=/proj/northadapt/data/reference/raw
-TARGET=/proj/northadapt/data/target/filtered/00_meta_exclude/target_filtered.vcf.gz
-REF_OUT=/proj/northadapt/data/reference/filtered
-TARGET_OUT=/proj/northadapt/data/target/filtered
+REF=/gorilla/proj/northadapt/data/reference/raw
+TARGET=/gorilla/proj/northadapt/data/target/filtered/00_meta_exclude/target_filtered.vcf.gz
+REF_OUT=/gorilla/proj/northadapt/data/reference/filtered
+TARGET_OUT=/gorilla/proj/northadapt/data/target/filtered
 
 # SNP FILTERING
 # biallelic SNPs, INFO, MASK for ref
@@ -31,8 +31,8 @@ for f in $REF/*.vcf.gz; do
     CHROM=$(basename $f .neo_impute_ph.vcf.gz)
     echo "Processing $CHROM"
     bcftools view --threads 4 \
-        -S $REF/noflag.inds.txt \ 
-        -m2 -M2 -v snps \ 
+        -S $REF/noflag.inds.txt \
+        -m2 -M2 -v snps \
         -i 'MASK_1000G=1 & INFO >= 0.8' \
         -Oz -o $REF_OUT/01_SNP_filter/$CHROM.SNPfilter.vcf.gz \
         $f
