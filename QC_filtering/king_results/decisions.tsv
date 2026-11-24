@@ -1,0 +1,199 @@
+sample	decision	coverage_x	retained_relatives
+adn002	retain	1.27	
+adn003	exclude	0.56	adn004
+adn004	retain	1.65	
+adn005	retain	0.36	
+adn007	retain	1.14	
+adn012dr	retain		
+ajv28	retain	1.35	
+ajv36	retain	0.97	
+ajv54	retain	0.9	
+ajv58	retain	2.68	
+ajv70	retain	1.29	
+apd002018025dr	retain		
+apd005014041dr	retain		
+apd006dr	exclude	1.26	apd016dr
+apd008dr	retain	0.56	
+apd009dr	retain	4.66	
+apd010011dr	retain		
+apd012038dr	retain		
+apd013029040dr	retain		
+apd016dr	retain	24.86	
+apd017dr	retain	12.8	
+apd033	retain	1.02	
+apd034	retain	0.56	
+apd039dr	retain	2.06	
+FRA002	exclude	2.914	FRA005; FRA012; FRA020
+FRA007	retain	0.965	
+FRA008	exclude	0.946	FRA005; HJE013
+FRA011	exclude	0.608	FRA005; FRA012; FRA013; FRA020; FRA022
+FRA012	retain	0.905	
+FRA013	retain	2.624	
+FRA021	exclude	0.8	FRA012; FRA020; FRA022; FRA030
+FRA022	retain	3.518	
+FRA023	exclude	0.959	FRA022; LAN009
+FRA025	exclude	2.178	FRA022
+FRA029	retain	1.032	
+FRA030	retain	1.891	
+FRA031	exclude	0.483	FRA030
+FRA039	exclude	0.979	FRA020; FRA022
+FRA041	exclude	1.066	FRA022; FRA043
+FRA042	exclude	0.273	FRA022; FRA043
+FRA043	retain	0.362	
+FRA101	retain	0.202	
+FRA105	retain	2.521	
+fvk002	retain	1.06	
+kor002	retain	4.60	
+kor007	exclude	0.85	kor002
+kor008	retain	1.70	
+kor009	retain	1.77	
+vbj001	retain	4.03	
+vbj004	retain	4.54	
+vbj006	retain	3.89	
+vbj008	exclude	0.9	vbj001
+vbj012	exclude	1.63	vbj018
+vbj013	exclude	3.05	vbj001; vbj006
+vbj018	retain	1.96	
+ans008	retain	1.94	
+ans014	exclude	2.58	ans017
+ans016	retain	0.33	
+ble008	retain	0.49	
+Gyvakarai1	retain	7.559	
+H22	retain	0.71	
+H26	retain	4.05	
+hem001	retain	0.29	
+LAN004	retain	3.52	
+lbk102	retain	0.349963	
+lbk138	retain	0.628951	
+motala12	retain	2.4	
+N18	retain	2.12	
+N19	retain	2.07	
+N20	retain	0.94	
+NEO122	retain	0.56	
+NEO123	retain	0.29	
+NEO17	retain	1.1	
+NEO18	retain	3.7	
+NEO19	retain	3.26	
+NEO220	retain	0.57	
+NEO225	retain	4.59	
+NEO23	retain	3.34	
+NEO25	retain	0.36	
+NEO254	retain	0.42	
+NEO260	retain	4.7	
+NEO261	retain	2.75	
+NEO27	retain	3.32	
+NEO28	retain	0.92	
+NEO29	retain	0.53	
+NEO306	retain	2.42	
+NEO307	retain	0.46	
+NEO36	retain	2.38	
+NEO51	retain	0.65	
+NEO568	retain	1.98	
+NEO570	retain	2.86	
+NEO586	retain	0.2	
+NEO589	retain	7.41	
+NEO595	retain	0.22	
+NEO598	retain	0.73	
+NEO640	retain	0.2	
+NEO641	retain	0.26	
+NEO645	retain	0.21	
+NEO683	retain	1.82	
+NEO733	retain	1.32	
+NEO735	retain	0.67	
+NEO737	retain	0.24	
+NEO738	retain	1.21	
+NEO739	retain	1.88	
+NEO744	retain	0.22	
+NEO745	retain	0.45	
+NEO747	retain	0.25	
+NEO749	retain	1.91	
+NEO751	retain	0.3	
+NEO759	retain	2.95	
+NEO790	retain	0.69	
+NEO791	retain	2.49	
+NEO792	retain	0.25	
+NEO853	retain	1.96	
+NEO860	retain	0.2	
+NEO861	retain	0.38	
+NEO866	retain	1.52	
+NEO870	retain	0.58	
+NEO878	retain	0.28	
+NEO886	retain	0.27	
+NEO898	retain	3.8	
+NEO91	retain	1.18	
+NEO92	retain	0.61	
+NEO925	retain	0.29	
+NEO932	retain	2.76	
+NEO933	retain	0.52	
+NEO935	retain	5.03	
+NEO942	retain	0.89	
+NEO943	retain	1.75	
+NEO945	retain	1.38	
+oll007	retain	1.24	
+oll009	retain	1.01	
+oll010	retain	0.26	
+poz120	retain	4.55209	
+poz236	retain	1.60544	
+poz252	retain	0.624048	
+poz297	retain	1.79728	
+poz503	retain	0.611455	
+RISE61	retain	0.31	
+RISE71	retain	0.28	
+RISE97	retain	0.61	
+Syltholm	retain	2.3	
+ZVEJ25	retain	4.37	
+ZVEJ27	retain	0.97	
+ZVEJ28	retain	0.26	
+ZVEJ31	retain	1.5	
+ZVEJ32	retain	1.38	
+hem004	retain	0.71	
+hem005	retain	2.39	
+VK531	retain	1.399	
+ROS003	retain	0.381	
+ROS005	retain	0.782	
+ROS016	retain	2.462	
+ROS018	exclude	1.057	ROS024; ROS026
+ROS021	exclude	0.275	FRA007; ROS024
+ROS023	exclude	0.307	ROS016
+ROS024	retain	0.242	
+ROS026	retain	1.929	
+ROS027	retain	0.56	
+ROS029	exclude	0.21	FRA007; ROS016
+ROS033	exclude	0.291	ROS026
+FRA004	exclude	5.775	FRA005; FRA012
+FRA005	retain	8.07	
+FRA009	exclude	0.745	FRA005; FRA007
+FRA014	exclude	0.422	FRA005; FRA012; LAN009
+FRA020	retain	4.048	
+FRA027	exclude	2.259	FRA022; FRA030
+FRA028	exclude	0.646	FRA030
+FRA032	exclude	0.454	FRA029; FRA030
+FRA033	exclude	0.558	FRA029; FRA030
+FRA034	exclude	0.846	FRA029; FRA030
+FRA106	retain	0.23	
+FRA107	retain	2.858	
+FRA108	retain	1.397	
+HJE005	exclude	0.31	HJE013
+HJE006	retain	0.673	
+HJE007	exclude	0.221	FRA105; ROS016
+HJE010	retain	0.889	
+HJE011	exclude	0.892	FRA043; HJE006
+HJE012	exclude	1.003	FRA030
+HJE013	retain	1.336	
+HUN001	retain	0.724	
+HUN002	exclude	3.4	FRA005; FRA007; FRA012; FRA013; FRA020; FRA022; FRA029; FRA030; FRA043; FRA101; FRA105; FRA106; FRA107; FRA108; HJE006; HJE010; HJE013; HUN001; LAN004; LAN007; LAN008; LAN009; ROS003; ROS005; ROS016; ROS024; ROS026; ROS027
+LAN001	exclude	0.323	LAN004
+LAN005	exclude	1.589	LAN004
+LAN006	exclude	1.183	LAN004
+LAN007	retain	6.354	
+LAN008	retain	3.611	
+LAN009	retain	0.248	
+ans017	retain	6.8	
+ajv29bON	exclude	0.2	ajv29aON
+ajv55dr	retain	0.46	
+ajv23a	exclude	0.7	ajv23b; ajv70
+ajv29c	exclude	0.93	ajv29aON
+ajv79b	exclude	0.46	ajv79a
+ajv79a	retain	0.75	
+ajv23b	retain	0.9	
+ajv29aON	retain	2	

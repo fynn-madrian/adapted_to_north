@@ -1,17 +1,14 @@
 #!/bin/bash
 #SBATCH -A uppmax2026-1-301
-#SBATCH -J relatedness_filtering
-#SBATCH -t 12:00:00
-#SBATCH -n 4
-#SBATCH --mail-type=ALL
-#SBATCH --output=./%x.%j.out
+#SBATCH -J target_king
+#SBATCH -t 00:10:00
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=5G
 
-# RELATEDNESS FILTERING
-# Filter out related individuals from the target dataset (third degree))
-# double check:
-# apd006 and apd016 have a first-degree relationship
-# Kor002 and kor007, adn003 and adn004 are a second-degree relationship
+module load PLINK/2.0.0-a.6.20-gfbf-2024a
+base=/gorilla/proj/northadapt/data/target/filtered
+out=$base/03_related_filter
+vcf=$out/king_markers/markers.vcf.gz
 
-
-
-# Seperarte the merged dataset into ref and target datasets and save
+plink2 --vcf "$vcf" --double-id \
+    --make-king-table --threads "$SLURM_CPUS_PER_TASK" --out "$out/king_$SLURM_JOB_ID"
