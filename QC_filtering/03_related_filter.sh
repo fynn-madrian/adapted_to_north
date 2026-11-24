@@ -12,6 +12,4 @@
 # apd006 and apd016 have a first-degree relationship
 # Kor002 and kor007, adn003 and adn004 are a second-degree relationship
 
-
-
 # Seperarte the merged dataset into ref and target datasets and save
