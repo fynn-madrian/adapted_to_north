@@ -14,13 +14,13 @@ CHR=$SLURM_ARRAY_TASK_ID
 MAF_MIN=0.01
 THREADS=4
 
-REF_IN=/gorilla/proj/northadapt/data/reference/filtered/02
-TARGET_IN=/gorilla/proj/northadapt/data/target/filtered/01_SNP_filter
+REF_IN=/gorilla/proj/northadapt/data/reference/filtered/01_SNP_filter
+TARGET_IN=/gorilla/proj/northadapt/data/target/filtered/02_related_filter
 REF_OUT=/gorilla/proj/northadapt/data/reference/filtered/03_MAF_filter
 TARGET_OUT=/gorilla/proj/northadapt/data/target/filtered/03_MAF_filter
 
-REF_FILE=$REF_IN/${CHR}.SNPfilter.vcf.gz          # adjust to your actual file names
-TARGET_FILE=$TARGET_IN/target.SNPfilter.vcf.gz
+REF_FILE=$REF_IN/${CHR}.SNPfilter.vcf.gz        
+TARGET_FILE=$TARGET_IN/target.SNPfilter.vcf.gz # change to the right file
 
 TMP=$TARGET_OUT/03_MAF_filter/tmp_chr${CHR}
 mkdir -p $TMP
