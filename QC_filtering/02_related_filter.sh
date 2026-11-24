@@ -7,7 +7,7 @@
 
 module load PLINK/2.0.0-a.6.20-gfbf-2024a
 base=/gorilla/proj/northadapt/data/target/filtered
-out=$base/03_related_filter
+out=$base/02_related_filter
 vcf=$out/king_markers/markers.vcf.gz
 
 plink2 --vcf "$vcf" --double-id \
