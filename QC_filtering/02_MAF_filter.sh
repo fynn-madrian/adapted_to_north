@@ -12,25 +12,28 @@
 set -euo pipefail
 module load BCFtools/1.23.1-GCC-15.2.0
 
-REF_IN=/proj/northadapt/data/reference/filtered/01_SNP_filter
-TARGET_IN=/proj/northadapt/data/target/filtered/01_SNP_filter
-REF_OUT=/proj/northadapt/data/reference/filtered
-TARGET_OUT=/proj/northadapt/data/target/filtered
-
-mkdir -p $REF_OUT/02_MAF_filter $TARGET_OUT/02_MAF_filter
-
-# Shared sites between ref and target
-# Merge ref and target datasets and apply MAF filter
-
 CHR=$SLURM_ARRAY_TASK_ID
 MAF_MIN=0.01
 THREADS=4
+
+REF_IN=/proj/northadapt/data/reference/filtered/01_SNP_filter
+TARGET_IN=/proj/northadapt/data/target/filtered/01_SNP_filter
+REF_OUT=/proj/northadapt/data/reference/filtered/02_MAF_filter
+TARGET_OUT=/proj/northadapt/data/target/filtered/02_MAF_filter
 
 REF_FILE=$REF_IN/${CHR}.SNPfilter.vcf.gz          # adjust to your actual file names
 TARGET_FILE=$TARGET_IN/target.SNPfilter.vcf.gz
 
 TMP=$TARGET_OUT/02_MAF_filter/tmp_chr${CHR}
 mkdir -p $TMP
+
+count() { bcftools index -n "$1"; }
+
+# 1. This chromosome, all samples
+bcftools view --threads $THREADS -Oz -o $TMP/ref.vcf.gz $REF_FILE
+bcftools view -r $CHR --threads $THREADS -Oz -o $TMP/target.vcf.gz $TARGET_FILE
+bcftools index -t $TMP/ref.vcf.gz
+bcftools index -t $TMP/target.vcf.gz
 
 # 2. Shared sites (same position, REF and ALT)
 bcftools isec -n=2 -c none -w1,2 -Oz -p $TMP/isec $TMP/ref.vcf.gz $TMP/target.vcf.gz
@@ -40,7 +43,7 @@ bcftools index -t $TMP/isec/0001.vcf.gz
 bcftools query -l $TMP/isec/0000.vcf.gz > $TMP/ref_samples.txt
 bcftools query -l $TMP/isec/0001.vcf.gz > $TMP/target_samples.txt
 
-# 3. Merge, recompute allele counts and frequencies on the merged set, MAF filter
+# 3. Merge, recompute allele counts and frequencies, MAF filter
 bcftools merge -m none --threads $THREADS -Ou $TMP/isec/0000.vcf.gz $TMP/isec/0001.vcf.gz \
   | bcftools annotate -x INFO,FORMAT -Ou \
   | bcftools +fill-tags -Ou -- -t AN,AC,AF,MAF \
@@ -48,14 +51,14 @@ bcftools merge -m none --threads $THREADS -Ou $TMP/isec/0000.vcf.gz $TMP/isec/00
 bcftools index -t $TMP/merged.maf.vcf.gz
 
 # 4. Split back into reference and target
-bcftools view -S $TMP/ref_samples.txt    --threads $THREADS -Oz -o $REF_OUT/02_MAF_filter/${CHR}.MAF.vcf.gz       $TMP/merged.maf.vcf.gz
-bcftools view -S $TMP/target_samples.txt --threads $THREADS -Oz -o $TARGET_OUT/02_MAF_filter/${CHR}.MAF.vcf.gz    $TMP/merged.maf.vcf.gz
+bcftools view -S $TMP/ref_samples.txt    --threads $THREADS -Oz -o $REF_OUT/02_MAF_filter/${CHR}.MAF.vcf.gz    $TMP/merged.maf.vcf.gz
+bcftools view -S $TMP/target_samples.txt --threads $THREADS -Oz -o $TARGET_OUT/02_MAF_filter/${CHR}.MAF.vcf.gz $TMP/merged.maf.vcf.gz
 bcftools index -t $REF_OUT/02_MAF_filter/${CHR}.MAF.vcf.gz
 bcftools index -t $TARGET_OUT/02_MAF_filter/${CHR}.MAF.vcf.gz
 
-# 5. Log SNP counts at each step and check that both outputs have the same sites
-N_REF=$(count $TMP/ref.vcf.gz); N_TGT=$(count $TMP/target.vcf.gz)
-N_SHARED=$(count $TMP/isec/0000.vcf.gz); N_MAF=$(count $TMP/merged.maf.vcf.gz)
+# 5. SNP counts and consistency check
+N_REF=$(count $TMP/ref.vcf.gz);            N_TGT=$(count $TMP/target.vcf.gz)
+N_SHARED=$(count $TMP/isec/0000.vcf.gz);   N_MAF=$(count $TMP/merged.maf.vcf.gz)
 N_REF_OUT=$(count $REF_OUT/02_MAF_filter/${CHR}.MAF.vcf.gz)
 N_TGT_OUT=$(count $TARGET_OUT/02_MAF_filter/${CHR}.MAF.vcf.gz)
 
