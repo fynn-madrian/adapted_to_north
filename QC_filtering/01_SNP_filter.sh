@@ -31,9 +31,7 @@ for f in $REF/*.vcf.gz; do
     CHROM=$(basename $f .neo_impute_ph.vcf.gz)
     echo "Processing $CHROM"
     bcftools view --threads 4 \
-        -S $REF/noflag.inds.txt \ 
-        -m2 -M2 -v snps \ 
-        -i 'MASK_1000G=1 & INFO >= 0.8' \
+        -S $REF/noflag.inds.txt -m2 -M2 -v snps -i 'MASK_1000G=1 & INFO >= 0.8' \
         -Oz -o $REF_OUT/01_SNP_filter/$CHROM.SNPfilter.vcf.gz \
         $f
     bcftools index -t $REF_OUT/01_SNP_filter/$CHROM.SNPfilter.vcf.gz
