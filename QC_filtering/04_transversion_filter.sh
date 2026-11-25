@@ -1,14 +1,14 @@
 #!/bin/bash
 #SBATCH -A uppmax2026-1-301
 #SBATCH -J transversion_filter
-#SBATCH -t 4:00:00
+#SBATCH -t 2:00:00
 #SBATCH -n 4
 #SBATCH --array=1-22
 #SBATCH --mail-type=ALL
-#SBATCH --output=./%x.%j.out
+#SBATCH --output=./TV_log/%x.%j.out
 
 # Transversion filter for sanity check
-
+set -euo pipefail
 module load BCFtools/1.23.1-GCC-15.2.0
 
 REF_IN=/gorilla/proj/northadapt/data/reference/filtered/03_MAF_filter
