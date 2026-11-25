@@ -18,7 +18,7 @@ TARGET_OUT=/gorilla/proj/northadapt/data/target/filtered
 mkdir -p $TARGET_OUT/01_SNP_filter_with_gp
 bcftools view --threads 4 \
     -m2 -M2 -v snps \
-    -i 'INFO >= 0.8 || SMAX(FMT/GP) < 0.99' \
+    -i 'INFO >= 0.8 || SMAX(FMT/GP) >= 0.99' \
     -Oz -o $TARGET_OUT/01_SNP_filter_with_gp/target.SNPfilter.vcf.gz \
     $TARGET
 bcftools index -t $TARGET_OUT/01_SNP_filter_with_gp/target.SNPfilter.vcf.gz
@@ -31,7 +31,7 @@ for f in $REF/*.vcf.gz; do
     CHROM=$(basename $f .neo_impute_ph.vcf.gz)
     echo "Processing $CHROM"
     bcftools view --threads 4 \
-        -S $REF/noflag.inds.txt -m2 -M2 -v snps -i 'MASK_1000G=1 & INFO >= 0.8 || SMAX(FMT/GP) < 0.99' \
+        -S $REF/noflag.inds.txt -m2 -M2 -v snps -i 'MASK_1000G=1 & INFO >= 0.8 || SMAX(FMT/GP) >= 0.99' \
         -Oz -o $REF_OUT/01_SNP_filter_with_gp/$CHROM.SNPfilter.vcf.gz \
         $f
     bcftools index -t $REF_OUT/01_SNP_filter_with_gp/$CHROM.SNPfilter.vcf.gz
