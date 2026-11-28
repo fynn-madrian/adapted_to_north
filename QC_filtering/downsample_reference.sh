@@ -5,20 +5,10 @@
 #SBATCH -n 2
 
 
-
-#Individual ID,
-target=/gorilla/proj/northadapt/41586_2023_6865_MOESM6_ESM.csv
-
-awk -F',' '
-    NR == 1 {
-        for (i = 1; i <= NF; i++)
-            if ($i == "Group label") col = i
-        next
-    }
-    { count[$col]++ }
-    END { for (g in count) print g "\t" count[g] }
-' $target | sort -k2,2nr > group_counts.tsv
-
+# HG_EuropeW:61
+# HG_EuropeE:74
+# Nomad Steppe Early: 85
+# Farmer Iran: 10
 
 #get counts for groups
 #set proportion
